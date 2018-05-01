@@ -20,6 +20,16 @@ use think\Page;
 use think\Verify;
 use think\Db;
 class Index extends Base {
+	function test(){
+		$u=new \app\admin\logic\UsersLogic() ;print_r($u->detail(1)); echo $u->getLastSql();
+		Db::listen(function($sql,$time,$explain){
+    // 记录SQL
+    echo $sql. ' ['.$time.'s]';
+    // 查看性能分析结果
+    dump($explain);
+});exit;
+		$rapprice=D('rap_price');$r=$rapprice-> find(); 
+	}
     
     public function index(){      
 
