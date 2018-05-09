@@ -12,5 +12,6 @@
  * $Author: IT宇宙人 2015-08-10 $
  */
 return [
-'app\home\command\search_pages'
+'app\home\command\search_pages',
+'app\home\command\ExpandDetails',
 ];

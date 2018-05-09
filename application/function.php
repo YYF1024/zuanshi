@@ -647,3 +647,87 @@ function flash_sale_time_space()
     );
     return $time_space;
 }
+
+
+function  export_excel($headers,$datas,$filename='excel'){
+	 
+	$objPHPExcel = new PHPExcel(); 
+
+	foreach ($headers as $key => $value) { 
+		$pColumn_name=PHPExcel_Cell::stringFromColumnIndex($key);
+		$objPHPExcel->setActiveSheetIndex(0)->setCellValue($pColumn_name.'2', $value);
+	} 
+
+	$i = 3;
+	if(is_array($datas)){	  
+		
+		foreach($datas as $key=>$col_datas){ 
+	 
+			foreach ($col_datas as $col_k => $col_value) {
+				$pColumn_name=PHPExcel_Cell::stringFromColumnIndex($col_k);
+				$objPHPExcel->getActiveSheet()->setCellValue($pColumn_name.$i,  $col_value,PHPExcel_Cell_DataType::TYPE_STRING);
+				 
+			}
+			 
+
+		 $i++;
+		}
+	}
+
+
+
+	if(strrpos($filename,'/')){
+		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+		$objWriter->save($filename);
+	}else{
+		header('Content-Type: application/vnd.ms-excel');
+		$filename=$filename.date('Ymd');
+		header('Content-Disposition: attachment;filename="'.$filename.'.xls"');
+		header('Cache-Control: max-age=0');
+		// If you're serving to IE 9, then the following may be needed
+		header('Cache-Control: max-age=1');
+
+		// If you're serving to IE over SSL, then the following may be needed
+		header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+		header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+		header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+		header ('Pragma: public'); // HTTP/1.0
+
+		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+		$objWriter->save('php://output');
+	}
+	 
+
+}
+
+function  readexcele($inputFileName){
+	$objPHPExcel = new PHPExcel(); 
+	// 读取excel文件
+	try {
+		$inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+		$objReader = PHPExcel_IOFactory::createReader($inputFileType);
+		$PHPExcelObj = $objReader->load($inputFileName);
+	} catch(Exception $e) {
+		die(‘加载文件发生错误：”‘.pathinfo($inputFileName,PATHINFO_BASENAME).'”: '.$e->getMessage());
+	}
+
+	// 确定要读取的sheet，什么是sheet，看excel的右下角，真的不懂去百度吧
+	  
+	$currentSheet = $PHPExcelObj->getSheet(0);            //选取第一张表单(Sheet1)为当前操作的表单
+	$data->sheets[0]['numRows'] = $currentSheet->getHighestRow(); 	
+	
+	$numinsert=0;
+
+	$data->sheets[0]['cells']=$currentSheet->toArray( );
+	
+	for ($i = 1; $i <= $data->sheets[0]['numRows']; $i++) { 
+		  
+		if($data->sheets[0]['cells'][$i][0] ){	
+			$rowData[]=$data->sheets[0]['cells'][$i];
+		}
+	}
+					 
+	return $rowData;
+
+
+}

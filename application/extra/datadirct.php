@@ -1,10 +1,12 @@
 <?php
-//颜色
+ 
 return [
+//白钻颜色
 'color'=>array( "1"=>'D',"2"=>'E',"3"=>'F',"4"=>'G', "5"=>'H',"6"=>'I',"7"=>'J',"8"=>'K',"9"=>'L',"10"=>'M',"11"=>'N',"12"=>'O',"13"=>'P',"14"=>'Q',"15"=>'R',"16"=>'S',"17"=>'T',"18"=>'U',"19"=>'V',"20"=>'W',"21"=>'X',"22"=>'Y',"23"=>'Z'),
 
-
-
+//彩钻颜色
+'Fancycolor'=>array( "1"=>'Yellow',"2"=>'Pink',"3"=>'Blue',"4"=>'Red', "5"=>'Green',"6"=>'Purple',"7"=>'Orange',"8"=>'Violet',"9"=>'Gray',"10"=>'Black',"11"=>'Brown',"12"=>'Champagne',"13"=>'Cognac',"14"=>'Other',"15"=>'Chameleon',"16"=>'White' ),
+ 
 //净度
 'clarity'=> array( "1"=>'FL',"2"=>'IF',"3"=>'VVS1',"4"=>'VVS2',"5"=>'VS1',"6"=>'VS2',"7"=>'SI1',"8"=>'SI2',"9"=>'SI3',"10"=>'I1',"11"=>'I2',"12"=>'I3'),
  
@@ -32,5 +34,7 @@ return [
 'Treatments'=> array('4'=>'Irradiated','1'=>'Laser Drilled','5'=>'HPHT','2'=>'Clarity Enhanced','3'=>'Color Enhanced','6'=>'Other'),
 
 //品牌
-'Brand' =>array("8"=>"Hearts and Arrows","1"=>"88-Cut","2"=>"Arctic Fox","10"=>"Argyle","3"=>"CanadaMark","11"=>"Canadian Ice","5"=>"Heart's On Fire","6"=>"Polar Bear","7"=>'Polar Ice')
+// 'Brand' =>array("8"=>"Hearts and Arrows","1"=>"88-Cut","2"=>"Arctic Fox","10"=>"Argyle","3"=>"CanadaMark","11"=>"Canadian Ice","5"=>"Heart's On Fire","6"=>"Polar Bear","7"=>'Polar Ice')
+
+ 
 ];
