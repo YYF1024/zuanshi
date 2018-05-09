@@ -22,6 +22,7 @@ DROP TABLE IF EXISTS `Locations`;
 CREATE TABLE `Locations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) DEFAULT NULL,
+  `areaname` varchar(30) DEFAULT NULL,
   `parentid` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
