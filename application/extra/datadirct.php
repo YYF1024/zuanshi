@@ -7,6 +7,10 @@ return [
 //彩钻颜色
 'Fancycolor'=>array( "1"=>'Yellow',"2"=>'Pink',"3"=>'Blue',"4"=>'Red', "5"=>'Green',"6"=>'Purple',"7"=>'Orange',"8"=>'Violet',"9"=>'Gray',"10"=>'Black',"11"=>'Brown',"12"=>'Champagne',"13"=>'Cognac',"14"=>'Other',"15"=>'Chameleon',"16"=>'White' ),
  
+ //彩钻颜色强度
+"Intensity" =>array("1"=>'Faint',"2"=>'Very Light',"3"=>'Light',"4"=>'Fancy Light',"5"=>'Fancy',"6"=>'Fancy Dark',"7"=>'Fancy Intense',"8"=>'Fancy Vivid',"9"=>'Fancy Deep' ),
+
+
 //净度
 'clarity'=> array( "1"=>'FL',"2"=>'IF',"3"=>'VVS1',"4"=>'VVS2',"5"=>'VS1',"6"=>'VS2',"7"=>'SI1',"8"=>'SI2',"9"=>'SI3',"10"=>'I1',"11"=>'I2',"12"=>'I3'),
  
@@ -30,7 +34,7 @@ return [
 //底面尺寸
 'CuletSize'=> array("1"=>'None',"5"=>'Very Small',"4"=>'Small',"3"=>'Medium',"2"=>'Large'),
 
-//Irradiated
+//处理
 'Treatments'=> array('4'=>'Irradiated','1'=>'Laser Drilled','5'=>'HPHT','2'=>'Clarity Enhanced','3'=>'Color Enhanced','6'=>'Other'),
 
 //品牌
