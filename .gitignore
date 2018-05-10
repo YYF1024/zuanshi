@@ -2,7 +2,7 @@
 composer.lock
 *.log
 thinkphp
-application/database.php
+database.php
 public/upload/*
 runtime/
 
