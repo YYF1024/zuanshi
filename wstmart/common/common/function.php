@@ -974,7 +974,7 @@ function WSTFormatIn($split,$str){
 
 
 function  export_excel($headers,$datas,$filename='excel'){
-	 
+	Loader:import( 'phpexcel.PHPExcel');
 	$objPHPExcel = new PHPExcel(); 
 	foreach ($headers as $key => $value) { 
 		$pColumn_name=PHPExcel_Cell::stringFromColumnIndex($key);
@@ -1015,6 +1015,7 @@ function  export_excel($headers,$datas,$filename='excel'){
 	 
 }
 function  readexcele($inputFileName){
+	Loader:import( 'phpexcel.PHPExcel');
 	$objPHPExcel = new PHPExcel(); 
 	// 读取excel文件
 	try {

@@ -2,6 +2,7 @@
 namespace wstmart\common\logic;
 use  Snoopy; 
 use  phpQuery;
+use think\Db;
 /*********************************************************
 *文件名：  rap.logic.php 
 *使用方法：
@@ -14,7 +15,7 @@ class Raplogic
 
 
     ////储存cookie参数
-    var  $COOKIE= "__gads=ID=daa0478321cda0ce:T=1524016286:S=ALNI_MZhDfw7SC4XNbhMw0cxYVeXsH58VA; messagesUtk=9ed41a8b6060ac5e03a4fbc27c295b31; __qca=P0-1145592900-1524016310505; _omappvp=hsOoFs1eSuvlftd1VfqViCLDxkqJ42JUEXcWDiy55W3ghe0nvfVNykTYPU29B9VHDe0P4vntKOzsP5Djqv4iFVG51nKO9tOQ; ASP.NET_Rapnet=hbuvky0f3c4mkpflwqhte5rv; CookieDeviceNumber=5290749; SnapABugHistory=1#; REGULARSettingsParams=; SearchSortBy=Sort1=Discount&Sort2=LowestPrice&Sort3=&Sort4=&Sort5=&Sort6=&NumOfResults=250; __utma=262718558.687496720.1524016276.1525682554.1525849408.6; __utmc=262718558; __utmz=262718558.1525425487.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); UserCulture=zh-cn; .MEMBERRAPNETFORMSAUTH=73ACA468E6CE983EFC21A7C0049A9F96AAF39115373A985EC76A6382A818A27AEC5664EDC0F08B818FC48AF1BBB3BD39C947C03E39427E9D35B892F60AD66320E8CFE3B564E6419F86DC9B16EDB4E0CA95AF851316F1FC74843C162608B9EFCDE504C985B749DBA0534007D5304A2AE4EBB72B7FF3E36682A1933F6D05568D08218B21A8CB73714C4CCD63945B44D9AEFFB290895F2836ED21EDB584C83FD61B8BBAA91C9CD856DBD12ECD05B02B52333E55BE1003CBD87E053352595706EDA06A93B14D04F9E16CD591E529212690ABD250F8BFCA469723EB5F2A22AC8FAC5272C62C0CE36F363F9CB92706BE4BA63577F140F9CF21004FF3062C70368DB5562F95865D; ActiveUserRowID=ActiveUserRowID=18554923; _ga=GA1.2.687496720.1524016276; _gid=GA1.2.859125569.1525830032; SnapABugRef=https%3A%2F%2Fclassic.rapnet.com%2FRapNet%2F%20https%3A%2F%2Fclassic.rapnet.com%2FLogin%2FLoginPage.aspx; SnapABugVisit=5#1525398133; __hs_opt_out=no; __hstc=205636236.9ed41a8b6060ac5e03a4fbc27c295b31.1524016277231.1525854954507.1525938129374.20; __hssrc=1; __hssc=205636236.3.1525938129374; hubspotutk=9ed41a8b6060ac5e03a4fbc27c295b31; mp_af3381f753feb25a0691c6643df2e7c8_mixpanel=%7B%22distinct_id%22%3A%20%22162d672e73c816-0590d0ac908897-7b1e3b-144000-162d672e73e739%22%2C%22%24initial_referrer%22%3A%20%22%24direct%22%2C%22%24initial_referring_domain%22%3A%20%22%24direct%22%7D";
+    var  $COOKIE= "ASP.NET_Rapnet=epzpuwyyocilprtw00smj004; _ga=GA1.2.267607181.1525355689; __gads=ID=7bced6ad58363938:T=1525355740:S=ALNI_MYUDmWYtMWACwMLqFhGQAvHRK4tKg; __hssrc=1; hubspotutk=addfc9aae4be62a08122774816b97c5c; __qca=P0-1633228937-1525355694042; messagesUtk=addfc9aae4be62a08122774816b97c5c; _omappvp=koNbN3yonEtHwdE7bZq67QtUclVbP5cxYfDBBUlkd7WMvSZqbL6Ws4g8Gk8QlZyUP34vrc7OzB20Zw4BnykVExyD4NG67gQQ; CookieDeviceNumber=5290547; SnapABugHistory=1#; __hs_opt_out=no; _hjIncludedInSample=1; REGULARSettingsParams=; SearchSortBy=Sort1=Discount&Sort2=LowestPrice&Sort3=&Sort4=&Sort5=&Sort6=&NumOfResults=50; __utmc=262718558; _gid=GA1.2.28897743.1525693135; __utmz=262718558.1525693187.3.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utma=262718558.267607181.1525355689.1525967512.1526040045.13; __hstc=205636236.addfc9aae4be62a08122774816b97c5c.1525355689700.1526040063927.1526088443583.19; ActiveUserRowID=ActiveUserRowID=18559960; .MEMBERRAPNETFORMSAUTH=FF7B70CE7212B814E128C3E2D2994E8EF944712334E4BD9E50A95C335F1F8169D53B009A13C3C4923911EA162DA854758B5B1A0F3401080E2DC686B97109A8A6B01291F68EEBA18D189A3924BE999266EADBA0943983E72DAFF9BDE9A2FB3DDDB246D45E27D989CB7F88AE751572C2008040E494F5C374D1B21055D6AA97CD023783AFD6D5C90964B13132E9AE6636756D047D0E8CA19F16C0F056D8C5B4040B48A25C4160BC1B4775F8BF761377F59E3324ACDFE86C5D7ABEC64633BE4899199886F382313624FC652682CDC0F6ED25DF76B44319DA69DE7F9F692DB96D57D19D64EE67560840C7BF5E0AE86275738890C93C33973938A650C4545569F8B56473A81549; SnapABugRef=https%3A%2F%2Fclassic.rapnet.com%2FRapNet%2F%20https%3A%2F%2Fclassic.rapnet.com%2FAuthentication.aspx%3FReturnUrl%3D%252fRapNet%252fSearch%252fResults.aspx%253fSearchSessionID%253d159374430%26SearchSessionID%3D159374430; SnapABugVisit=14#1525355911; __hssc=205636236.7.1526088443583; mp_af3381f753feb25a0691c6643df2e7c8_mixpanel=%7B%22distinct_id%22%3A%20%221632648b277596-06ee154cd5eab3-3c3c5905-13c680-1632648b278411%22%2C%22%24initial_referrer%22%3A%20%22%24direct%22%2C%22%24initial_referring_domain%22%3A%20%22%24direct%22%7D";
 
     function __Construct()
     {	 
@@ -137,20 +138,38 @@ class Raplogic
 
 	function  analy_Details($html,$type=0){//分析搜索钻石
 	 	//
-		phpQuery::newDocumentHTML($html); 
-		$menu_a = pq("#ucDiamond_lnkReport" )->text() ;    //偶数行 数据
+		phpQuery::newDocumentHTML($html);  
+		 
+		$data['type']=intval($type);
+		$data['goodsName']=$data['productNo']=trim(pq('.ShrinkToFitContainer:first')->text( ));//库存商品货号
 
-		$data['StockNumber']=trim(pq('.ShrinkToFitContainer:first')->text( ));//库存
-		
+		$reportcert=trim(pq('#ucDiamond_lnkReport')->text( ));//
+
+		$timcert=explode(' ',$reportcert,2); 
+		if($timcert[1]!='Information'&&$timcert[1]){//有证书
+			$data['certtype']= strtolower(trim($timcert[0]));
+			$data['certreport']=trim($timcert[1]);
+
+		}
 		////详情页 左边框数据 
 		$ShrinkToFitContainer=pq('.tblDiamondInfo  .CellValue');
 		/// print($ShrinkToFitContainer);
 		 foreach($ShrinkToFitContainer as  $k=>$a){
 			$tdata[]=trim(pq($a)->text( ));
 		  
-		 }///print_r($tdata);
+		 } //print_r($tdata);
 		 if(!strrpos( $tdata[0],'-')){//形状
-			 $data['shape']=trim($tdata[0]);
+			$shapedb= Db::name('shape');
+			$tmpsparr=explode(' ', trim($tdata[0]));
+			if(count($tmpsparr)<=2){
+				$shapestr=trim($tdata[0]);
+			}else{
+				array_pop($tmpsparr);
+				$shapestr=implode(' ',$tmpsparr);
+
+			} 
+			$shapedata=$shapedb->where(array('english_name'=>array('like','%'.$shapestr.'%' )))->find(); 
+			$data['shape']=$shapedata['shape_id'];
 		 }else{
 			$data['shape']='';
 		 } 
@@ -292,16 +311,10 @@ class Raplogic
 		 }else{
 			$data['features']='';
 		 }
+ 
 
-		 if(strrpos( $tdata[17],'-')!==0){//   比率
-			 $data['Ratio']=$tdata[17];
-		 }else{
-			$data['Ratio']='';
-		 }
-
-
-		 echo trim(substr($tdata[6] ,0, strpos( $tdata[6],'('))) ;print_r($data );
-exit;
+ 
+ 
 		 ///////////////////
 
 		//////////多店铺/////////////
@@ -315,17 +328,7 @@ exit;
 				$rldata[]=trim(pq($r)->text( ));
 			  
 			 }
-			 $Sellerinfo['id']=$prodata['Seller']= trim(pq($RapInfoBox)->find('.CompanyName')->text( ));//卖方
-			 $Sellerinfo['name']=trim($rldata[4]);
-
-			 preg_match_all("/[\d-x]+/",trim($rldata[7]), $out ); //联系方式
-			 $Sellerinfo['connect']=implode(' ',$out[0]);
-			  print_r($Sellerinfo);
-
-			  $user = D('shops'); 
-				// 模型对象赋值
-				 
-			  $user ->insert($Sellerinfo,true);
+			
 			 ///////////////////////////////////////////////
 
 			 foreach(pq($RapInfoBox)->find('.MelbourneRegularSmallHeader') as $pk=>$prices){//价格
@@ -334,7 +337,7 @@ exit;
 					 $data['PriceCt']=trim(str_replace(array('$',','),'',pq($prices)->text( )));
 				 }
 				 if($pk==2){//总计
-					 $data['PriceTotal']=trim(str_replace(array('$',','),'',pq($prices)->text( )));
+					 $data['shopPrice']=trim(str_replace(array('$',','),'',pq($prices)->text( )));
 				 }if($pk==1){//Rap%
 					 $data['RapPercent']=round (floatval(trim(pq($prices)->text( ))),2);
 				 }
@@ -344,29 +347,41 @@ exit;
 			 
 			 //print_r($rldata);
 			 if(strrpos( $rldata[0],'-')!==0){//  批号 LotNumber
-				 $data['LotNumber']=$rldata[0];
+				 $data['goodsId']=$data['goodsSn']=$rldata[0];
 			 }
 
 			 if(strrpos( $rldata[1],'-')!==0){//    可用性
 				 $data['Usability']=$rldata[1];
 			 }
 			 if(strrpos( $rldata[2],'-')!==0){//    区域位置 
-				 $tmpl=explode(',',$rldata[2]);
-				 foreach($tmpl as $k=>$v){
-					 $tmpl[$k]=trim($v);
-				 }
-				 $tmplo=implode('","',$tmpl);   
+				 $tmpl=explode(',',$rldata[2]); 
+				 if(is_array($tmpl)){
+				 	foreach($tmpl as $k=>$v){
+				 		$locstr=trim($v); 
+				 		if(strrpos( $locstr,'USA')!==false){//美国有50州 
+						 	$locstr=trim(str_replace('USA', '', $locstr));
+							if(!$locstr){$locstr='USA';}
+				 		}
+				 		$tmpl[$k]=$locstr;
+					 }
+					 $tmplo=implode('","',$tmpl);   
+			echo 'tmplo';	print_r($tmplo); 
+					 $Locationssql=Db::name('Locations');
+					 $Locations='';
+					 
+					 $sqlloc=$Locationssql->where('name','exp','in ("'.$tmplo.'") ' )->select(); 
 
-				 $Locationssql=D('locations');
-				 $Locations='';
+				 }
 				 
-				 $sqlloc=$Locationssql->where('name','exp','in ("'.$tmplo.'") ' )->select(); 
+				 
 				 if(is_array($sqlloc)){
 					 $sqloc=[];
 					 foreach($sqlloc as $l){
 						 $sqloc[]=$l['id'];
 					 }
 					 $Locations=implode(',',$sqloc);
+					 
+					 $Sellerinfo['areaId']=intval(array_pop($sqloc));
 				 }
 				 ///print_r($sql);print_r($Locationssql->getLastSql());
 				 $data['Locations']=$Locations;
@@ -391,7 +406,27 @@ exit;
 				 $data['Escrow']=$rldata[3];
 			 }
 
-			 print_r($data);
+
+			 $Sellerinfo['shopId']=$Sellerinfo['shopSn']=$data['shopId']= trim(pq($RapInfoBox)->find('.CompanyName')->text( ));//卖方
+			 $Sellerinfo['userId']=1;
+			 $Sellerinfo['shopName']=trim($rldata[4]);
+			 $Sellerinfo['areaIdPath']=$Locations;
+			 $data['saleTime']=$data['createTime']=$Sellerinfo['createTime']=date('Y-m-d');
+
+			 preg_match_all("/[\d-x]+/",trim($rldata[7]), $out ); //联系方式
+			 $Sellerinfo['shopTel']=implode(' ',$out[0]);
+			  print_r($Sellerinfo);
+
+			  $Shops = model('common/Shops');   
+				// 模型对象赋值
+				 
+			  $Shops ->insert($Sellerinfo,true);
+ print_r($data);
+
+			  $Goods = model('common/Goods'); 
+			  $Goods ->insert($data,true);
+
+			
 			 break;//如果需要其他几个商铺价格 break 去掉
 		}
 		return $data;
